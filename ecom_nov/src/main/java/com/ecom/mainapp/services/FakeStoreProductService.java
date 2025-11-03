@@ -28,7 +28,7 @@ public class FakeStoreProductService implements ProductService{
         return products;
     }
 
-    public Product getProductById(int id) throws ProductNotFoundException {
+    public Product getProductById(long id) throws ProductNotFoundException {
         FakeStoreProductDto fakeStoreProductDto = restTemplate.getForObject("https://fakestoreapi.com/products/"+id,
                 FakeStoreProductDto.class);
         if (fakeStoreProductDto == null) {
@@ -37,7 +37,7 @@ public class FakeStoreProductService implements ProductService{
         return convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
     }
 
-    public boolean deleteProductById(int id) throws ProductNotFoundException {
+    public boolean deleteProductById(long id) throws ProductNotFoundException {
         if (getProductById(id) == null) {
             throw new ProductNotFoundException("Product not found");
         } else {
