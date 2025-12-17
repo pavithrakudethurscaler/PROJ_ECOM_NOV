@@ -1,5 +1,6 @@
 package com.ecom.mainapp.controllers;
 
+import com.ecom.mainapp.dtos.ProductDto;
 import com.ecom.mainapp.exceptions.ProductNotFoundException;
 import com.ecom.mainapp.models.Product;
 import com.ecom.mainapp.services.ProductService;
@@ -29,14 +30,14 @@ public class ProductController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        ResponseEntity<Product> response = new ResponseEntity<>(productService.createProduct(product), HttpStatus.CREATED);
+    public ResponseEntity<Product> createProduct(@RequestBody ProductDto productDto) {
+        ResponseEntity<Product> response = new ResponseEntity<>(productService.createProduct(productDto.toProduct()), HttpStatus.CREATED);
         return response;
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@RequestBody Product product) throws ProductNotFoundException {
-        ResponseEntity<Product> response = new ResponseEntity<>(productService.updateProduct(product), HttpStatus.OK);
+    public ResponseEntity<Product> updateProduct(@RequestBody ProductDto product) throws ProductNotFoundException {
+        ResponseEntity<Product> response = new ResponseEntity<>(productService.updateProduct(product.toProduct()), HttpStatus.OK);
         return response;
     }
 
